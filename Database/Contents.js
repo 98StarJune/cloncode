@@ -20,13 +20,16 @@ const userSchema = new Schema({
 
     counter :{
         chat : {
-            type: Number
+            type: Number,
+            default: 0
         },
         like:{
-            type:Number
+            type:Number,
+            default: 0
         },
         normal:{
-            type:Number
+            type:Number,
+            default: 0
         }
     }
 })
