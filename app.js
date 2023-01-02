@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const port = 8080;
 
 const auth = require('./Middleware/auth');
-const dburl = require('./secret/Secret.json')
+const dburl = require('./secret/secret.json')
 
 app.use(express.json());
 
