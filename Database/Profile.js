@@ -16,6 +16,10 @@ const userSchema = new Schema({
     usertag : {
         type : Number,
         require: true
+    },
+    location:{
+        type : String,
+        require: true
     }
 })
 
