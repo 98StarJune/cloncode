@@ -1,44 +1,26 @@
 const User = require('../../Database/User')
+const Profile = require('../../Database/Profile')
 const {errormessage} = require('../error')
 
 const bcrypt = require('bcryptjs')
 
-module.exports.signup = async (req, res, next) =>{
-    const id = req.body.id;
-    const pw = req.body.pw;
-    const img = req.file;
-    const nickname = req.body.nickname;
+module.exports.signup = async (req, res, next) => {
     const phone = req.body.phone;
-    const location = req.body.location;
-    const email = req.body.email;
 
-    const hashed = await bcrypt.hash(pw, 12);
-    try{
-        const resault = await User.find({id:id})
-        try{
-            if(resault[0]){
-                console.log(resault);
-                return res.status(200).json({message : '이미 존재하는 ID 입니다.'});
-            }
+    const find = await User.findOne({phone: phone});
+    try {
+        if (!find) {
             const user = await new User({
-                id: id,
-                pw : hashed,
-                email:email,
-                profileIMG: img,
-                nickname : nickname,
-                phone : phone,
-                location : location
+                phone: phone
             }).save()
-            try{
-                res.status(201).json({message : "정상적으로 등록되었습니다."})
-            }catch(err){
+            try {
+                return res.status(201).json({message: "정상적으로 등록되었습니다."})
+            } catch (err) {
                 return errormessage(err, res, 'Error Detected at [control/signup/save]')
             }
-
-        }catch (err){
-            return errormessage(err, res, 'Error Detected at [control/signup/find]');
         }
-    }catch (err){
-        return errormessage(err, res, 'Error Detected at [control/signup/hash]');
+        return res.status(409).json({message: '이미 존재하는 ID 입니다.'});
+    } catch (err) {
+        return errormessage(err, res, 'Error Detected at [control/signup/find]');
     }
 }
