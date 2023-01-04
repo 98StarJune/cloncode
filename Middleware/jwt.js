@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const {jwt} = require('../secret/secret.json')
+const {jwtcode} = require('../secret/secret.json')
 const {errormessage} = require('../controller/error')
 
 module.exports.jwtauth = (req, res, next) => {
@@ -7,7 +7,7 @@ module.exports.jwtauth = (req, res, next) => {
     let decodedToken;
 
     try{
-        decodedToken = jwt.verify(token, jwt);
+        decodedToken = jwt.verify(token, jwtcode);
     }
     catch (err){
         return errormessage(err, res, 'Error Detected at [Middleware/jwt/auth]')

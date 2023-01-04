@@ -13,10 +13,10 @@ module.exports.login = async (req, res, next) =>{
             return res.status(401).json({message : "존재하지 않는 회원입니다."});
         }
         else{
-            const token = await jwt.sign({
+            const token = jwt.sign({
                 id : user._id.toString(),
                 time : new Date().toString()
-            }, secret.jwt, {expiresIn : '1h'});
+            }, secret.jwtcode, {expiresIn : '1h'});
             res.status(200).json({token : token, message : "로그인에 성공했습니다."});
         }
 
