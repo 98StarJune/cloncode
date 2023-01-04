@@ -17,7 +17,6 @@ const userSchema = new Schema({
         type:String,
         require:true
     },
-
     counter :{
         chat : {
             type: Number,
