@@ -2,12 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 const {body} = require('express-validator');
+const {jwtauth} = require('./jwt');
 
 const {signup} = require('../controller/auth/signup');
 const {login} = require('../controller/auth/login');
 const {addEmail} = require('../controller/auth/addemail');
 const {signout} = require('../controller/auth/signout');
-const {jwtauth} = require('./jwt');
+
 
 
 // auth middleware

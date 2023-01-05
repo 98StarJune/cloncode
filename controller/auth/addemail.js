@@ -5,7 +5,6 @@ const User = require('../../Database/User')
 const {errormessage} = require("../error");
 const {validationResult} = require("express-validator");
 const {validation} = require("../validationError");
-const {stringify} = require("nodemon/lib/utils");
 
 module.exports.addEmail = async (req, res, next) =>{
     let errors = validationResult(req);

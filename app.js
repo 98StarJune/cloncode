@@ -6,7 +6,8 @@ const mongoose = require('mongoose');
 const port = 8080;
 
 const auth = require('./Middleware/auth');
-const dburl = require('./secret/secret.json')
+const content = require('./Middleware/content');
+const dburl = require('./secret/secret.json');
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -16,6 +17,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 app.use('/auth', auth);
+app.use('content', content);
 
 mongoose.connect(dburl.dburl, {dbName: "Clon"})
 .then(() =>{
