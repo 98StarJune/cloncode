@@ -13,5 +13,4 @@ module.exports.errormessage = (err, res) => {
     }else{
         res.json({message : err.message})
     }
-
 }
