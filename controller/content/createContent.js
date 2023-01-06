@@ -7,7 +7,7 @@ const {errormessage} = require("../error");
 const {validationResult} = require("express-validator");
 const {validation} = require("../validationError");
 
-module.exports.create = async (req, res, next) =>{
+module.exports.createContent = async (req, res, next) =>{
     const id = req.userId;
     const title = req.body.title;
     const content = req.body.content;

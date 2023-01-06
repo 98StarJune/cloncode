@@ -4,8 +4,10 @@ const router = express.Router();
 const {body} = require('express-validator');
 const {jwtauth} = require('./jwt');
 
-const {create} = require('../controller/content/create');
+const {createContent} = require('../controller/content/createContent');
+const {deleteContent} = require('../controller/content/deleteContent')
 
-router.post('/create',jwtauth, create);
+router.post('/create',jwtauth, createContent);
+router.post('delete', jwtauth, deleteContent)
 
 module.exports = router;

@@ -6,7 +6,7 @@ const {errormessage} = require("../error");
 const {validationResult} = require("express-validator");
 const {validation} = require("../validationError");
 
-module.exports.delete = async (req, res, next) =>{
+module.exports.deleteContent = async (req, res, next) =>{
     const userid = req.userId;
     const contentid = mongoose.mongo.ObjectId(req.body.contentid);
 
