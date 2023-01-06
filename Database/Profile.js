@@ -19,19 +19,19 @@ const userSchema = new Schema({
     },
     location: {
         location0: {
-            type: String,
+            type: Object,
             require: true
         },
         location1: {
-            type: String,
+            type: Object,
             require: true
         },
         location2: {
-            type: String,
+            type: Object,
             require: true
         },
         location3: {
-            type: String,
+            type: Object,
             require: true
         }
     }

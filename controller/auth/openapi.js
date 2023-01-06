@@ -75,7 +75,6 @@ module.exports.nearlylocation = async (location, level) => {
                     for (Keys in name) {
                         resalut.push(name[Keys].properties.adm_nm);
                     }
-                    console.log(resalut);
                     return resalut;
                 }
             }

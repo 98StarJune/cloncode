@@ -2,7 +2,7 @@ const User = require('../../Database/User')
 const Profile = require('../../Database/Profile')
 const {errormessage} = require('../error')
 const {validation} = require('../validationError')
-const {inquiry} = require('./openapi');
+const {inquiry, nearlylocation} = require('./openapi');
 
 const bcrypt = require('bcryptjs')
 const {validationResult} = require("express-validator");
@@ -16,7 +16,7 @@ module.exports.signup = async (req, res, next) => {
     try {
         const phone = req.body.phone;
         const nickname = req.body.nickname;
-        const location = await inquiry(req.body.location);
+
         const img = req.file;
         let id;
         const find = await User.findOne({phone: phone});
@@ -35,12 +35,24 @@ module.exports.signup = async (req, res, next) => {
 
                 const profile = await Profile.findOne({nickname: nickname, usertag: usertag})
                 if (!profile) {
+                    let location = []
+                    location.push(await inquiry(req.body.location));
+                    let locationArr = [];
+                    for (let i = 1; i < 4; i++) {
+                        const locationTemp = await nearlylocation(location, i)
+                        locationArr.push(locationTemp);
+                    }
                     const profile = await new Profile({
                         id: id,
                         nickname: nickname,
                         usertag: usertag,
                         img: "/",
-                        location: location
+                        location: {
+                            location0 : location,
+                            location1 : locationArr[0],
+                            location2 : locationArr[1],
+                            location3 : locationArr[2]
+                        }
                     })
                     const profilesave = await profile.save();
                     if (!profilesave) {
