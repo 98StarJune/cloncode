@@ -4,6 +4,7 @@ const key = require('../../secret/secret.json');
 const {toFloat} = require("validator");
 
 module.exports.inquiry = async (addr) => {
+    console.log(new Date() + "외부 API를 호출하였습니다.")
     const adress = addr.replaceAll(" ", "+");
     ;
     try {
