@@ -45,7 +45,7 @@ module.exports.nearlylocation = async (location, level) => {
             level_number = 8000;
             break;
     }
-    const address = "부산광역시 사하구 다대1동" + " 행정복지센터"
+    const address = location + " 행정복지센터"
     const url_address = address.replaceAll(" ", "+");
     try {
         const keyvalue = key.openapi_key;
