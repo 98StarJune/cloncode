@@ -15,7 +15,7 @@ module.exports.jwtauth = (req, res, next) => {
         next();
     }
     catch (err){
-        err.statusCode = 500;
+        err.statusCode = 401;
         err.message = "토큰이 유효하지 않습니다."
         errormessage(err, res);
     }
