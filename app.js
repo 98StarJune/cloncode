@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 app.use('/auth', auth);
-app.use('content', content);
+app.use('/content', content);
 
 mongoose.connect(dburl.dburl, {dbName: "Clon"})
 .then(() =>{

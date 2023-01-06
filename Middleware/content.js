@@ -6,6 +6,6 @@ const {jwtauth} = require('./jwt');
 
 const {create} = require('../controller/content/create');
 
-router.post('/create', create);
+router.post('/create',jwtauth, create);
 
 module.exports = router;
