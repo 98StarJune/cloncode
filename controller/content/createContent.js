@@ -11,6 +11,7 @@ module.exports.createContent = async (req, res, next) =>{
     const id = req.userId;
     const title = req.body.title;
     const content = req.body.content;
+    const tag = req.body.tag;
     const img = "/";
     try{
         const res_location = await Profile.findOne({id : id});
@@ -20,7 +21,8 @@ module.exports.createContent = async (req, res, next) =>{
                 title : title,
                 content : content,
                 img : img,
-                loaction : location[0]
+                loaction : location[0],
+                tag : tag
             })
             const save_resault = await content.save();
             if(save_resault){
