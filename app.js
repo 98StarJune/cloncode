@@ -1,4 +1,4 @@
-const express=require('express');
+const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
@@ -20,11 +20,17 @@ app.use(express.json());
 app.use('/auth', auth);
 app.use('/content', content);
 
-mongoose.connect(dburl.dburl, {dbName: "Clon"})
-.then(() =>{
-    app.listen(port);
-    console.log('DB Connected Successful')
-})
-.catch(err =>{
-    console.log(err);
-})
+mongoose
+    .connect(dburl.dburl, {dbName: "Clon"})
+    .then(() => {
+        console.log('DB Connected Successful')
+        const server = app.listen(port);
+        const io = require('socket.io')(server);
+        io.on('connection', socket => {
+            console.log('[Ready] Listening for Socket (Client Connected)');
+        })
+        console.log('[Ready] Listening for Back End ' + port);
+    })
+    .catch(err => {
+        console.log(err);
+    })
