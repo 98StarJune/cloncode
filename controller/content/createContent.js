@@ -20,12 +20,13 @@ module.exports.createContent = async (req, res, next) => {
     try {
         const res_location = await Profile.findOne({id: id});
         if (res_location) {
-            const location = res_location.location.location0;
+            let location = res_location.location.location0;
+            location = location[0].toString()
             const contents = new Content({
                 title: title,
                 content: content,
                 img: img,
-                loaction: location[0],
+                location: location,
                 tag: tag
             })
             const save_resault = await contents.save();
