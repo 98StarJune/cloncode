@@ -12,6 +12,7 @@ module.exports.createContent = async (req, res, next) => {
     if (id) {
         console.log('로그인됨')
     }
+    const price = req.body.price;
     const title = req.body.title;
     const content = req.body.content;
     console.log(content)
@@ -24,6 +25,7 @@ module.exports.createContent = async (req, res, next) => {
             location = location[0].toString()
             const contents = new Content({
                 title: title,
+                price: price,
                 content: content,
                 img: img,
                 location: location,

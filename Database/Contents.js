@@ -6,6 +6,10 @@ const userSchema = new Schema({
         type: String,
         require: true
     },
+    price :{
+        type : String,
+        require : true
+    },
     content: {
         type: String,
         require: true
