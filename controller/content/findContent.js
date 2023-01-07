@@ -23,6 +23,7 @@ module.exports.findContentByKeyword = async (req, res, next) =>{
         const keyword = new RegExp(temp);
         const find_result = await Content.find({title: keyword, location : location_level})
         if(find_result){
+            console.log(find_result);
             res.status(201).json({
                 result : find_result
             })

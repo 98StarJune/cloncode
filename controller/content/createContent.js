@@ -27,7 +27,8 @@ module.exports.createContent = async (req, res, next) => {
                 content: content,
                 img: img,
                 location: location,
-                tag: tag
+                tag: tag,
+                createrid : id
             })
             const save_resault = await contents.save();
             if (save_resault) {
