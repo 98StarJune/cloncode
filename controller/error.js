@@ -5,6 +5,9 @@ module.exports.errormessage = (err, res) => {
     if(err.validation){
         return res.status(500).json({message : err.message, error : err.validation});
     }
+    if(err.message){
+        console.log(err.message);
+    }
     if(err.root){
         console.log(new Date());
         console.log(err)
