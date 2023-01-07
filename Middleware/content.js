@@ -8,6 +8,6 @@ const {createContent} = require('../controller/content/createContent');
 const {deleteContent} = require('../controller/content/deleteContent')
 
 router.post('/create',jwtauth, createContent);
-router.post('delete', jwtauth, deleteContent)
+router.post('/delete', jwtauth, deleteContent);
 
 module.exports = router;
