@@ -6,10 +6,11 @@ const {jwtauth} = require('./jwt');
 
 const {createContent} = require('../controller/content/createContent');
 const {deleteContent} = require('../controller/content/deleteContent');
-const {findContentByKeyword} = require('../controller/content/findContent');
+const {findContentByKeyword, findAll} = require('../controller/content/findContent');
 
 router.post('/create',jwtauth, createContent);
 router.post('/delete', jwtauth, deleteContent);
 router.post('/findkey', jwtauth, findContentByKeyword);
+router.post('/findall', jwtauth, findAll);
 
 module.exports = router;
