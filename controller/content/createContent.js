@@ -14,7 +14,8 @@ module.exports.createContent = async (req, res, next) => {
     const title = req.body.title;
     const content = req.body.content;
     const tag = req.body.tag;
-    const img = "req.file";
+    const img = req.file;
+    console.log(img)
     try {
         const res_location = await Profile.findOne({id: id});
         if (res_location) {
