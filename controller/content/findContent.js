@@ -49,11 +49,7 @@ module.exports.findAll = async (req, res, next) => {
         const find_result = await Content.find({location: location_level});
         if (find_result) {
             res.status(201).json({
-                contents: find_result,
-                user: {
-                    nickname: findbyid.nickname,
-                    tag : findbyid.tag
-                }
+                resault: find_result
             })
         } else {
             return res.status(404).json({message: "검색 결과 없음"})
@@ -87,7 +83,11 @@ module.exports.findDetail = async (req, res, next) => {
 
         if(userid === findbyid.id){
             res.status(200).json({
-                result: res_content,
+                contents: res_content,
+                user: {
+                    nickname: findbyid.nickname,
+                    tag : findbyid.tag
+                },
                 match : true
             })
         }else{
