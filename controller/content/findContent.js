@@ -20,6 +20,12 @@ module.exports.findContentByKeyword = async (req, res, next) => {
         }
         const location_level = findbyid.location.location0
         const temp = req.body.keyword
+        if(!temp){
+            const error = new Error('need Keyword');
+            error.statusCode = 404;
+            error.root = "control/content/findContentByKey/Keyword"
+            throw error;
+        }
         const keyword = new RegExp(temp);
         const find_result = await Content.find({title: keyword, location: location_level})
         if (find_result) {
