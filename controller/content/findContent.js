@@ -49,7 +49,7 @@ module.exports.findAll = async (req, res, next) => {
         const find_result = await Content.find({location: location_level});
         if (find_result) {
             res.status(201).json({
-                resault: find_result
+                result: find_result
             })
         } else {
             return res.status(404).json({message: "검색 결과 없음"})
