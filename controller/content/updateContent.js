@@ -14,7 +14,10 @@ module.exports.updateContent = async (req, res, next) => {
         const req_title = req.body.title;
         const req_content = req.body.content;
         const req_tag = req.body.tag;
-        const req_img = "/";
+        let req_img = req.file;
+        if(req_img){
+            req_img = req_img.path;
+        }
         let user_location
 
         const content = await Content.findById(contentid);
