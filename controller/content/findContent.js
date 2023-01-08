@@ -23,7 +23,6 @@ module.exports.findContentByKeyword = async (req, res, next) => {
         const keyword = new RegExp(temp);
         const find_result = await Content.find({title: keyword, location: location_level})
         if (find_result) {
-            console.log(find_result);
             res.status(201).json({
                 result: find_result
             })
@@ -62,7 +61,6 @@ module.exports.findAll = async (req, res, next) => {
 module.exports.findDetail = async (req, res, next) => {
     const userid = req.userId;
     const contentid = mongoose.mongo.ObjectId(req.body.content);
-    console.log(req.body)
     try {
         const findbyid = await Profile.findOne({id: userid})
         if (!findbyid) {
@@ -73,7 +71,6 @@ module.exports.findDetail = async (req, res, next) => {
         }
 
         const res_content = await Content.findById(contentid);
-        console.log(res_content.id);
         if(!res_content){
             const error = new Error('Cannot Find Content');
             error.statusCode = 404;
