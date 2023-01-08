@@ -14,10 +14,10 @@ module.exports.errormessage = (err, res) => {
     }
     if (err.root) {
         fs.appendFileSync('log.txt', "Error : " + err + "\n");
-        fs.appendFileSync('log.txt', "Root : " + err.root);
+        fs.appendFileSync('log.txt', "Root : " + err.root + "\n");
     }
     if (err.statusCode) {
-        fs.appendFileSync('log.txt', "Error Code : "+err.statusCode)
+        fs.appendFileSync('log.txt', "Error Code : "+err.statusCode + "\n")
         res.status(err.statusCode).json({message: err.message});
     } else {
         res.json({message: err.message})
