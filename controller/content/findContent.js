@@ -35,10 +35,6 @@ module.exports.findContentByKeyword = async (req, res, next) =>{
     }
 }
 
-// module.exports.findContentByCategory = (req, res, next) =>{
-//     const category = req.body.category;
-//     const find_result = Content.find({})
-// }
 module.exports.findAll = async (req, res, next) =>{
     const id = req.userId;
     const findbyid = await Profile.findOne({id : id})

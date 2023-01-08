@@ -7,7 +7,7 @@ const userSchema = new Schema({
         require: true
     },
     price :{
-        type : String,
+        type : Number,
         require : true
     },
     content: {
@@ -24,6 +24,16 @@ const userSchema = new Schema({
     tag: {
         type: String,
         require: true
+    },
+    time : {
+        createdTime : {
+            type: String,
+            require: true
+        },
+        editedTime : {
+            type : String,
+            require: true
+        }
     },
     createrid: {
         type: String,

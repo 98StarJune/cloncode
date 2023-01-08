@@ -40,7 +40,7 @@ module.exports.updateContent = async (req, res, next) => {
                 if (content.location !== user_location) {
                     content.location = user_location
                 }
-                ;
+                content.time.editedTime = new Date().toISOString()
 
                 const result = await content.save();
                 if (result) {

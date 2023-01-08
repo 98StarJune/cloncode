@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Profile = require('../../Database/Profile');
 const Content = require('../../Database/Contents');
+//const path = require('path')
 
 const {errormessage} = require("../error");
 const {validationResult} = require("express-validator");
@@ -9,15 +10,11 @@ const {validation} = require("../validationError");
 
 module.exports.createContent = async (req, res, next) => {
     const id = req.userId;
-    if (id) {
-        console.log('로그인됨')
-    }
     const price = req.body.price;
     const title = req.body.title;
     const content = req.body.content;
-    console.log(content)
     const tag = req.body.tag;
-    const img = "/";
+    const img = "req.file";
     try {
         const res_location = await Profile.findOne({id: id});
         if (res_location) {
@@ -30,6 +27,7 @@ module.exports.createContent = async (req, res, next) => {
                 img: img,
                 location: location,
                 tag: tag,
+                time : {createdTime : new Date().toISOString()},
                 createrid : id
             })
             const save_resault = await contents.save();
