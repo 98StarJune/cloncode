@@ -7,6 +7,7 @@ const port = 8080;
 const auth = require('./Middleware/auth');
 const content = require('./Middleware/content');
 const dburl = require('./secret/secret.json');
+const path = require("path");
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -14,7 +15,9 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'POST, GET');
     next();
 })
+
 app.use(express.json());
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/auth', auth);
 app.use('/content', content);

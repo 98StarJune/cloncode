@@ -10,10 +10,10 @@ const {validation} = require("../validationError");
 
 module.exports.createContent = async (req, res, next) => {
     const id = req.userId;
-    const price = req.body.price;
-    const title = req.body.title;
-    const content = req.body.content;
-    const tag = req.body.tag;
+    const price = req.body.newpostdata.price;
+    const title = req.body.newpostdata.title;
+    const content = req.body.newpostdata.content;
+    const tag = req.body.newpostdata.tag;
     let img = req.file
     if(img){
         img = img.path
