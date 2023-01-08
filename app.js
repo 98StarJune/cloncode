@@ -8,7 +8,7 @@ const auth = require('./Middleware/auth');
 const content = require('./Middleware/content');
 const dburl = require('./secret/secret.json');
 const path = require("path");
-
+const fs = require('fs');
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
