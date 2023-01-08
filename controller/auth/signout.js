@@ -3,6 +3,7 @@ const Profile = require('../../Database/Profile');
 const Content = require('../../Database/Contents');
 const mongoose = require("mongoose");
 const {errormessage} = require("../error");
+const {deleteFile} = require('../deleteFile');
 
 module.exports.signout = async (req, res, next) => {
     const id = req.userId;
@@ -13,9 +14,12 @@ module.exports.signout = async (req, res, next) => {
             return res.status(401).json({message : "존재하지 않는 사용자입니다."});
         }
         else{
-            const content = await Content.find({id: id});
+            const content = await Content.find({createrid: id});
             if (content) {
-                await Content.deleteMany({id: id});
+                for (let i = 0; i < content.length; i++) {
+                    deleteFile(content[i].img);
+                }
+                await Content.deleteMany({createrid: id});
             }else{
                 console.log('Contents가 존재하지 않는 사용자입니다.')
             }
