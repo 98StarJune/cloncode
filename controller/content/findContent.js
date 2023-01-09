@@ -10,48 +10,25 @@ const {response} = require("express");
 
 /**키워드 입력으로 검색*/
 module.exports.findContentByKeyword = async (req, res, next) => {
-    const id = req.userId;
-    const temp = req.body.keyword
     try {
-
-        const user = await Profile.find({id: id})
-        if (!user) {
+        const id = req.userId;
+        const findbyid = await Profile.findOne({id: id})
+        if (!findbyid) {
             const error = new Error('에러가 발생했습니다.');
             error.statusCode = 401;
             error.root = "control/content/findContent/findUser"
             throw error;
         }
-
+        const location_level = findbyid.location.location0
+        const temp = req.body.keyword
         if(!temp){
             const error = new Error('need Keyword');
             error.statusCode = 404;
             error.root = "control/content/findContentByKey/Keyword"
             throw error;
         }
-        const keyword = new RegExp(temp); //keyword 받아서 정규식으로 바꿔
-        const location_level = user.location.level; //유저정보에서 레벨을 추출해
-        let location_value;
-        let find_;
-        switch (location_level){
-            case 0:
-                location_value = user.location.location0 //value에 레벨에 해당하는 모든 값을 넣어
-                find_ = await Content.find({location: location_value})
-                break; //value와 일치하는 모든 게시글을 찾아서 find_에 넣어
-            case 1:
-                location_value = user.location.location1
-                find_ = await Content.find({location: location_value})
-                break;
-            case 2:
-                location_value = user.location.location2
-                find_ = await Content.find({location: location_value})
-                break;
-            case 3:
-                location_value = user.location.location3
-                find_ = await Content.find({location: location_value})
-                break;
-        }
-//find_에서 keyword로 찾아
-        const find_result = await find_.find({title: keyword})
+        const keyword = new RegExp(temp);
+        const find_result = await Content.find({title: keyword, location: location_level})
         if (find_result) {
             res.status(201).json({
                 result: find_result
