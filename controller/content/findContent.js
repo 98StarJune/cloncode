@@ -8,6 +8,7 @@ const {validationResult} = require("express-validator");
 const {validation} = require("../validationError");
 const {response} = require("express");
 
+/**키워드 입력으로 검색*/
 module.exports.findContentByKeyword = async (req, res, next) => {
     try {
         const id = req.userId;
@@ -18,7 +19,6 @@ module.exports.findContentByKeyword = async (req, res, next) => {
             error.root = "control/content/findContent/findUser"
             throw error;
         }
-        const location_level = findbyid.location.location0
         const temp = req.body.keyword
         if(!temp){
             const error = new Error('need Keyword');
@@ -27,7 +27,29 @@ module.exports.findContentByKeyword = async (req, res, next) => {
             throw error;
         }
         const keyword = new RegExp(temp);
-        const find_result = await Content.find({title: keyword, location: location_level})
+        const location_level = findbyid.location.level;
+        let location_value;
+        let find;
+        switch (location_level){
+            case 0:
+                location_value = findbyid.location.location0
+                find = await Content.find({location: location_value})
+                break;
+            case 1:
+                location_value = findbyid.location.location1
+                find = await Content.find({location: location_value})
+                break;
+            case 2:
+                location_value = findbyid.location.location2
+                find = await Content.find({location: location_value})
+                break;
+            case 3:
+                location_value = findbyid.location.location3
+                find = await Content.find({location: location_value})
+                break;
+        }
+
+        const find_result = await Content.find({title: keyword, location: find})
         if (find_result) {
             res.status(201).json({
                 result: find_result
@@ -50,8 +72,28 @@ module.exports.findAll = async (req, res, next) => {
         throw error;
     }
     try {
-        const location_level = findbyid.location.location0
-        const find_result = await Content.find({location: location_level});
+        const location_level = findbyid.location.level;
+        let location_value;
+        let find;
+        switch (location_level){
+            case 0:
+                location_value = findbyid.location.location0
+                find = await Content.find({location: location_value})
+                break;
+            case 1:
+                location_value = findbyid.location.location1
+                find = await Content.find({location: location_value})
+                break;
+            case 2:
+                location_value = findbyid.location.location2
+                find = await Content.find({location: location_value})
+                break;
+            case 3:
+                location_value = findbyid.location.location3
+                find = await Content.find({location: location_value})
+                break;
+        }
+        const find_result = await Content.find({location: find});
         if (find_result) {
             res.status(201).json({
                 result: find_result

@@ -18,6 +18,11 @@ const userSchema = new Schema({
         require: true
     },
     location: {
+        level:{
+            type:Number,
+            require : true,
+            default : 0
+        },
         location0: {
             type: Object,
             require: true

@@ -1,5 +1,5 @@
 const User = require('../../Database/User')
-const Profile = require('../../Database/Profile')
+
 const {errormessage} = require('../error')
 const {validation} = require('../validationError')
 const {inquiry, nearlylocation} = require('./openapi');
@@ -48,6 +48,7 @@ module.exports.signup = async (req, res, next) => {
                         usertag: usertag,
                         img: "/",
                         location: {
+                            level : 0,
                             location0 : location,
                             location1 : locationArr[0],
                             location2 : locationArr[1],
