@@ -6,6 +6,8 @@ const port = 8080;
 
 const auth = require('./Middleware/auth');
 const content = require('./Middleware/content');
+const profile = require('./Middleware/profile');
+
 const dburl = require('./secret/secret.json');
 const path = require("path");
 const fs = require('fs');
@@ -21,6 +23,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/auth', auth);
 app.use('/content', content);
+app.use('/profile', profile);
 
 mongoose
     .connect(dburl.dburl, {dbName: "Clon"})
